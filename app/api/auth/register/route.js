@@ -19,7 +19,12 @@ export async function POST(req) {
   if (!cpfValido(cpf)) return erro("CPF inválido.");
   if (email.length > 55 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return erro("E-mail inválido (até 55 caracteres).");
   if (celular.length < 10 || celular.length > 11) return erro("Celular inválido (DDD + número).");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dt_nasc)) return erro("Informe a data de nascimento.");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dt_nasc) || Number.isNaN(Date.parse(dt_nasc))) {
+    return erro("Data de nascimento inválida (o ano deve ter 4 dígitos).");
+  }
+  if (dt_nasc < "1900-01-01" || dt_nasc > new Date().toLocaleDateString("sv-SE")) {
+    return erro("Data de nascimento fora do período permitido.");
+  }
   if (senha.length < 6) return erro("A senha deve ter ao menos 6 caracteres.");
 
   const res = await backend("/post/usuario", "POST", { nome, cpf, dt_nasc, email, celular, senha });

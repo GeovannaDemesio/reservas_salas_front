@@ -52,6 +52,9 @@ export function Shell({ children }) {
       <header className="bg-white shadow">
         <nav className="mx-auto flex max-w-4xl flex-wrap items-center gap-2 px-4 py-3">
           <span className="mr-4 font-semibold text-indigo-900">Reserva de Salas</span>
+          {link("/", "Início")}
+          {link("/reservar", "Reservar")}
+          {link("/reservas", "Consultar")}
           {link("/salas", "Salas")}
           {link("/laboratorios", "Laboratórios")}
           <span className="ml-auto text-sm text-zinc-600">

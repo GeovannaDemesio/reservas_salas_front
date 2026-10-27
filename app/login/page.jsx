@@ -21,7 +21,7 @@ export default function LoginPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cpf, senha }),
     });
-    if (res.ok) return router.replace("/salas");
+    if (res.ok) return router.replace("/");
     setErro((await res.json()).erro ?? "Erro ao entrar.");
     setEnviando(false);
   }

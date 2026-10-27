@@ -31,7 +31,7 @@ export default function CadastroPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados),
     });
-    if (res.ok) return router.replace("/salas");
+    if (res.ok) return router.replace("/");
     setErro((await res.json()).erro ?? "Erro ao cadastrar.");
     setEnviando(false);
   }
@@ -47,7 +47,7 @@ export default function CadastroPage() {
         )}
         <Campo rotulo="Nome completo" autoComplete="name" {...campo("nome")} />
         <Campo rotulo="CPF" inputMode="numeric" placeholder="000.000.000-00" {...campo("cpf")} />
-        <Campo rotulo="Data de nascimento" type="date" {...campo("dt_nasc")} />
+        <Campo rotulo="Data de nascimento" type="date" min="1900-01-01" max="9999-12-31" {...campo("dt_nasc")} />
         <Campo rotulo="E-mail" type="email" autoComplete="email" {...campo("email")} />
         <Campo rotulo="Celular" type="tel" placeholder="(11) 91234-5678" {...campo("celular")} />
         <Campo rotulo="Senha (mín. 6 caracteres)" type="password" autoComplete="new-password" {...campo("senha")} />
